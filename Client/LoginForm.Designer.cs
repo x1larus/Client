@@ -34,7 +34,7 @@ namespace Client
             this.PassBox = new System.Windows.Forms.TextBox();
             this.PassPic = new System.Windows.Forms.PictureBox();
             this.LoginButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.AuthorizationLabel = new System.Windows.Forms.Label();
             this.ErrorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.LoginPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PassPic)).BeginInit();
@@ -43,7 +43,8 @@ namespace Client
             // LoginPic
             // 
             this.LoginPic.Image = global::Client.Properties.Resources.login;
-            this.LoginPic.Location = new System.Drawing.Point(12, 79);
+            this.LoginPic.Location = new System.Drawing.Point(14, 114);
+            this.LoginPic.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.LoginPic.Name = "LoginPic";
             this.LoginPic.Size = new System.Drawing.Size(64, 64);
             this.LoginPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -53,24 +54,27 @@ namespace Client
             // LoginBox
             // 
             this.LoginBox.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LoginBox.Location = new System.Drawing.Point(82, 89);
+            this.LoginBox.Location = new System.Drawing.Point(94, 119);
+            this.LoginBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.LoginBox.Name = "LoginBox";
-            this.LoginBox.Size = new System.Drawing.Size(251, 45);
+            this.LoginBox.Size = new System.Drawing.Size(286, 54);
             this.LoginBox.TabIndex = 1;
             // 
             // PassBox
             // 
             this.PassBox.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.PassBox.Location = new System.Drawing.Point(82, 174);
+            this.PassBox.Location = new System.Drawing.Point(94, 232);
+            this.PassBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.PassBox.Name = "PassBox";
-            this.PassBox.Size = new System.Drawing.Size(251, 45);
+            this.PassBox.Size = new System.Drawing.Size(286, 54);
             this.PassBox.TabIndex = 3;
             this.PassBox.UseSystemPasswordChar = true;
             // 
             // PassPic
             // 
             this.PassPic.Image = global::Client.Properties.Resources.pass;
-            this.PassPic.Location = new System.Drawing.Point(12, 164);
+            this.PassPic.Location = new System.Drawing.Point(14, 227);
+            this.PassPic.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.PassPic.Name = "PassPic";
             this.PassPic.Size = new System.Drawing.Size(64, 64);
             this.PassPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -82,50 +86,52 @@ namespace Client
             this.LoginButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LoginButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.LoginButton.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LoginButton.Location = new System.Drawing.Point(0, 264);
+            this.LoginButton.Location = new System.Drawing.Point(0, 352);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(345, 58);
+            this.LoginButton.Size = new System.Drawing.Size(394, 77);
             this.LoginButton.TabIndex = 4;
             this.LoginButton.Text = "Войти";
             this.LoginButton.UseVisualStyleBackColor = true;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
-            // label1
+            // AuthorizationLabel
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(345, 60);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Авторизация";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.AuthorizationLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.AuthorizationLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AuthorizationLabel.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.AuthorizationLabel.Location = new System.Drawing.Point(0, 0);
+            this.AuthorizationLabel.Name = "AuthorizationLabel";
+            this.AuthorizationLabel.Size = new System.Drawing.Size(394, 80);
+            this.AuthorizationLabel.TabIndex = 5;
+            this.AuthorizationLabel.Text = "Авторизация";
+            this.AuthorizationLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // ErrorLabel
             // 
             this.ErrorLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.ErrorLabel.Location = new System.Drawing.Point(12, 231);
+            this.ErrorLabel.Location = new System.Drawing.Point(14, 308);
             this.ErrorLabel.Name = "ErrorLabel";
-            this.ErrorLabel.Size = new System.Drawing.Size(321, 34);
+            this.ErrorLabel.Size = new System.Drawing.Size(367, 45);
             this.ErrorLabel.TabIndex = 6;
             this.ErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LoginForm
             // 
             this.AcceptButton = this.LoginButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(345, 322);
+            this.ClientSize = new System.Drawing.Size(394, 429);
             this.Controls.Add(this.ErrorLabel);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.AuthorizationLabel);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.PassBox);
             this.Controls.Add(this.PassPic);
             this.Controls.Add(this.LoginBox);
             this.Controls.Add(this.LoginPic);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "LoginForm";
             this.ShowIcon = false;
             this.Text = "Login";
@@ -144,7 +150,7 @@ namespace Client
         private System.Windows.Forms.TextBox PassBox;
         private System.Windows.Forms.PictureBox PassPic;
         private System.Windows.Forms.Button LoginButton;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label AuthorizationLabel;
         private System.Windows.Forms.Label ErrorLabel;
     }
 }
