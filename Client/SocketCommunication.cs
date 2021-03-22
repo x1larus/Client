@@ -10,6 +10,7 @@ namespace Client
     public class SocketCommunication
     {
         private Socket Sock;
+        private Thread RecvThr;
         public SocketCommunication(string Addr, int Port)
         {
             Sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -19,6 +20,8 @@ namespace Client
             {
                 //error to GUI
             }
+            RecvThr = new Thread(ReceiveFromServer);
+            RecvThr.Start();
         }
         public int SendToServer(string Message)
         {
@@ -27,7 +30,7 @@ namespace Client
             return Sock.Send(Buffer);
         }
 
-        private void ReciveFromServer()
+        private void ReceiveFromServer()
         {
             while (true)
             {
