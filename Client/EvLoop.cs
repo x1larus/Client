@@ -6,16 +6,28 @@ using System.Threading;
 
 namespace Client
 {
-    class EvLoop
+    public class EvLoop
     {
         private Queue<Tuple<string, List<string>>> TaskQueue;
         private ManualResetEvent Wait;
         private static object QueueLock;
+        private Thread LoopThr;
+        private MainForm MainFormAddress;
+        private SocketCommunication SenderAddress;
+
         public EvLoop()
         {
             TaskQueue = new Queue<Tuple<string, List<string>>>();
             Wait = new ManualResetEvent(false);
             QueueLock = new object();
+            LoopThr = new Thread(Loop);
+            LoopThr.Start();
+        }
+
+        public void SetSenderAddress(SocketCommunication a)
+        {
+            SenderAddress = a;
+            return;
         }
 
         public void AddTask(string Cmd, List<string> Args)
@@ -29,7 +41,7 @@ namespace Client
             return;
         }
 
-        private void loop()
+        private void Loop()
         {
             while (true)
             {
@@ -44,9 +56,21 @@ namespace Client
                 {
                     Temp = TaskQueue.Dequeue();
                 }
-                //parser
+                //tasks
+                switch (Temp.Item1)
+                {
+                    case "RecvParse":
+                        RecvParser(Temp.Item2);
+                        break;
+                }
+
                 Wait.Reset();
             }
+        }
+
+        private void RecvParser(List<string> Args)
+        {
+            string Request = Args[0];
         }
     }
 }

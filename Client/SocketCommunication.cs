@@ -7,10 +7,15 @@ using System.Threading;
 
 namespace Client
 {
+    
     public class SocketCommunication
     {
+        public const int MAX = 1024;
         private Socket Sock;
         private Thread RecvThr;
+        private EvLoop Loop;
+        private MainForm MainFormAddress;
+
         public SocketCommunication(string Addr, int Port)
         {
             Sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -22,7 +27,14 @@ namespace Client
             }
             RecvThr = new Thread(ReceiveFromServer);
             RecvThr.Start();
+            return;
         }
+
+        public void SetLoopAddress(EvLoop a)
+        {
+
+        }
+
         public int SendToServer(string Message)
         {
             byte[] Buffer = new byte[256];
@@ -36,8 +48,12 @@ namespace Client
             {
                 byte[] Buffer = new byte[256];
                 int Bytes = Sock.Receive(Buffer);
-                string Message = Encoding.Unicode.GetString(Buffer, 0, Bytes);
-                //EvLoop.AddTask("parse", Message);
+                if (Bytes == 0)
+                    continue;
+                string Request = Encoding.Unicode.GetString(Buffer, 0, Bytes);
+                List<string> Temp = new List<string>();
+                Temp.Add(Request);
+                Loop.AddTask("RecvParse", Temp);
             }
         }
     }
