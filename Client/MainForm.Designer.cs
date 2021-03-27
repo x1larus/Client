@@ -46,7 +46,7 @@ namespace Client
             this.ChatLog.Name = "ChatLog";
             this.ChatLog.ReadOnly = true;
             this.ChatLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ChatLog.Size = new System.Drawing.Size(800, 384);
+            this.ChatLog.Size = new System.Drawing.Size(794, 384);
             this.ChatLog.TabIndex = 0;
             // 
             // MsgEnterBox
@@ -68,10 +68,11 @@ namespace Client
             this.SendButton.ForeColor = System.Drawing.Color.White;
             this.SendButton.Location = new System.Drawing.Point(648, 390);
             this.SendButton.Name = "SendButton";
-            this.SendButton.Size = new System.Drawing.Size(152, 55);
+            this.SendButton.Size = new System.Drawing.Size(140, 55);
             this.SendButton.TabIndex = 2;
             this.SendButton.Text = "Hack";
             this.SendButton.UseVisualStyleBackColor = false;
+            this.SendButton.Click += new System.EventHandler(this.SendButton_Click);
             // 
             // MainForm
             // 
@@ -79,7 +80,7 @@ namespace Client
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(794, 450);
             this.Controls.Add(this.SendButton);
             this.Controls.Add(this.MsgEnterBox);
             this.Controls.Add(this.ChatLog);
