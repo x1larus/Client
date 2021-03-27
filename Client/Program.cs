@@ -17,7 +17,12 @@ namespace Client
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            //
+            SocketCommunication Sender = new SocketCommunication();
+            EvLoop Loop = new EvLoop();
+            Sender.SetLoopAddress(Loop);
+            Loop.SetSenderAddress(Sender);
+            Application.Run(new MainForm(Sender, Loop));
         }
     }
 }

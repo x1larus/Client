@@ -12,8 +12,8 @@ namespace Client
         private ManualResetEvent Wait;
         private static object QueueLock;
         private Thread LoopThr;
-        private MainForm MainFormAddress;
-        private SocketCommunication SenderAddress;
+        private MainForm GUI;
+        private SocketCommunication Sender;
 
         public EvLoop()
         {
@@ -26,7 +26,13 @@ namespace Client
 
         public void SetSenderAddress(SocketCommunication a)
         {
-            SenderAddress = a;
+            Sender = a;
+            return;
+        }
+
+        public void SetFormAddress(MainForm a)
+        {
+            GUI = a;
             return;
         }
 

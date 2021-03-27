@@ -13,20 +13,17 @@ namespace Client
     {
         private SocketCommunication Sender;
         private EvLoop Loop;
-        public MainForm()
+        public MainForm(SocketCommunication a, EvLoop b)
         {
+            Sender = a;
+            Loop = b;
+            Sender.SetFormAddress(this);
+            Loop.SetFormAddress(this);
             InitializeComponent();
-            Dictionary<string, string> Args = new Dictionary<string, string>();
-            Args.Add("MSG", "some shit");
-            Args.Add("SENDER", "your mom");
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            /*Sender = new SocketCommunication("", 1488);
-            Loop = new EvLoop();
-            Loop.SetSenderAddress(Sender);
-            Sender.SetLoopAddress(Loop);*/
         }
 
         private void SendButton_Click(object sender, EventArgs e)
@@ -35,7 +32,6 @@ namespace Client
             if (Message.Length == 0)
                 return;
             MsgEnterBox.Clear();
-            
         }
 
         public void AddNewGlobalMsg(Dictionary<string, string> Args)

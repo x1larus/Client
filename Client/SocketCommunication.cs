@@ -14,25 +14,36 @@ namespace Client
         private Socket Sock;
         private Thread RecvThr;
         private EvLoop Loop;
-        private MainForm MainFormAddress;
+        private MainForm GUI;
 
-        public SocketCommunication(string Addr, int Port)
+        public SocketCommunication()
+        {
+        }
+
+        public bool Connect(string Addr, int Port)
         {
             Sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint IPAddr = new IPEndPoint(IPAddress.Parse(Addr), Port);
             Sock.Connect(IPAddr);
             if (!Sock.Connected)
             {
-                //error to GUI
+                return false;
             }
             RecvThr = new Thread(ReceiveFromServer);
             RecvThr.Start();
-            return;
+            return true;
         }
 
         public void SetLoopAddress(EvLoop a)
         {
+            Loop = a;
+            return;
+        }
 
+        public void SetFormAddress(MainForm a)
+        {
+            GUI = a;
+            return;
         }
 
         public int SendToServer(string Message)
