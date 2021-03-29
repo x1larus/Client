@@ -126,7 +126,7 @@ namespace Client
 
         private void GlobalChatNewMsg(Dictionary<string, string> Args)
         {
-            GUI.AddNewGlobalMsg(Args);
+            GUI.Invoke(GUI.GlobalMsgDelegate, new object[] { Args });
             return;
         }
 
@@ -144,7 +144,8 @@ namespace Client
 
         private void ErrorToGUI(Dictionary<string, string> Args)
         {
-            GUI.Error(Args["ERROR"]);
+            GUI.Invoke(GUI.ErrorDelegate, new object[] { Args["ERROR"] });
+            return;
         }
     }
 

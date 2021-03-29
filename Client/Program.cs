@@ -22,6 +22,7 @@ namespace Client
             EvLoop Loop = new EvLoop();
             Sender.SetLoopAddress(Loop);
             Loop.SetSenderAddress(Sender);
+            Sender.Connect("", 3333); //fuck yeah
             Application.Run(new MainForm(Sender, Loop));
         }
     }

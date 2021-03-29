@@ -14,6 +14,10 @@ namespace Client
         private string Nickname;
         private SocketCommunication Sender;
         private EvLoop Loop;
+        public delegate void Error(string Error);
+        public Error ErrorDelegate;
+        public delegate void GlobalMsg(Dictionary<string, string> Args);
+        public GlobalMsg GlobalMsgDelegate;
         public MainForm(SocketCommunication a, EvLoop b)
         {
             Sender = a;
@@ -22,6 +26,8 @@ namespace Client
             Loop.SetFormAddress(this);
             InitializeComponent();
             Nickname = "beta_client";
+            ErrorDelegate = new Error(ErrorMethod);
+            GlobalMsgDelegate = new GlobalMsg(GlobalMsgMethod);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -43,22 +49,19 @@ namespace Client
             return;
         }
 
-        public void AddNewGlobalMsg(Dictionary<string, string> Args)
+        public void GlobalMsgMethod(Dictionary<string, string> Args)
         {
             string Line, Sender, Msg;
             if (!Args.TryGetValue("SENDER", out Sender) || !Args.TryGetValue("MSG", out Msg))
                 return;
             Line = "[" + Sender + "]: " + Msg;
-            ChatLog.AppendText(Line + "\n");
+            ChatLog.AppendText(Line + "\r" + "\n");
             return;
         }
 
-        public void Error(string Error)
+        public void ErrorMethod(string Error)
         {
-            var CurrColor = ChatLog.ForeColor;
-            ChatLog.ForeColor = Color.Red;
-            ChatLog.AppendText("[SYSTEM]: " + Error + "\n");
-            ChatLog.ForeColor = CurrColor;
+            ChatLog.AppendText("[SYSTEM]: " + Error + "\r" + "\n");
             return;
         }
     }

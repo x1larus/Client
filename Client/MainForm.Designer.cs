@@ -40,7 +40,7 @@ namespace Client
             this.ChatLog.Cursor = System.Windows.Forms.Cursors.Default;
             this.ChatLog.Dock = System.Windows.Forms.DockStyle.Top;
             this.ChatLog.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ChatLog.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(113)))), ((int)(((byte)(2)))));
+            this.ChatLog.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.ChatLog.Location = new System.Drawing.Point(0, 0);
             this.ChatLog.Multiline = true;
             this.ChatLog.Name = "ChatLog";
