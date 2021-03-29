@@ -22,6 +22,7 @@ namespace Client
             QueueLock = new object();
             LoopThr = new Thread(Loop);
             LoopThr.Start();
+            return;
         }
 
         public void SetSenderAddress(SocketCommunication a)
@@ -71,6 +72,12 @@ namespace Client
                     case "global":
                         GlobalChatNewMsg(Temp.Item2);
                         break;
+                    case "SendToServer":
+                        BuildRequest(Temp.Item2);
+                        break;
+                    case "SystemError":
+                        ErrorToGUI(Temp.Item2);
+                        break;
                 }
 
                 Wait.Reset();
@@ -119,7 +126,25 @@ namespace Client
 
         private void GlobalChatNewMsg(Dictionary<string, string> Args)
         {
-            //в форму
+            GUI.AddNewGlobalMsg(Args);
+            return;
+        }
+
+        private void BuildRequest(Dictionary<string, string> Args)
+        {
+            string Request = "";
+            foreach(var Current in Args)
+            {
+                Request += Current.Key + "=<" + Current.Value + ">;";
+            }
+            Request += '.';
+            Sender.SendToServer(Request);
+            return;
+        }
+
+        private void ErrorToGUI(Dictionary<string, string> Args)
+        {
+            GUI.Error(Args["ERROR"]);
         }
     }
 

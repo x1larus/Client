@@ -18,11 +18,12 @@ namespace Client
 
         public SocketCommunication()
         {
+            Sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            return;
         }
 
         public bool Connect(string Addr, int Port)
         {
-            Sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint IPAddr = new IPEndPoint(IPAddress.Parse(Addr), Port);
             Sock.Connect(IPAddr);
             if (!Sock.Connected)
@@ -50,6 +51,13 @@ namespace Client
         {
             byte[] Buffer = new byte[256];
             Buffer = Encoding.Unicode.GetBytes(Message);
+            if (!Sock.Connected)
+            {
+                Dictionary<string, string> Args = new Dictionary<string, string>();
+                Args.Add("ERROR", "no connection to server");
+                Loop.AddTask("SystemError", Args);
+                return -1;
+            }
             return Sock.Send(Buffer);
         }
 
@@ -58,6 +66,8 @@ namespace Client
             while (true)
             {
                 byte[] Buffer = new byte[256];
+                if (!Sock.Connected)
+                    continue;
                 int Bytes = Sock.Receive(Buffer);
                 if (Bytes == 0)
                     continue;
