@@ -49,7 +49,7 @@ namespace Client
             if (!Args.TryGetValue("SENDER", out Sender) || !Args.TryGetValue("MSG", out Msg))
                 return;
             Line = "[" + Sender + "]: " + Msg;
-            ChatLog.Text += Line + "\n";
+            ChatLog.AppendText(Line + "\n");
             return;
         }
 
@@ -57,7 +57,7 @@ namespace Client
         {
             var CurrColor = ChatLog.ForeColor;
             ChatLog.ForeColor = Color.Red;
-            cChatLog.Text += "[SYSTEM]: " + Error + "\n";
+            ChatLog.AppendText("[SYSTEM]: " + Error + "\n");
             ChatLog.ForeColor = CurrColor;
             return;
         }

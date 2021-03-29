@@ -48,7 +48,7 @@ namespace Client
             return;
         }
 
-        private void Loop()
+        public void Loop()
         {
             while (true)
             {
