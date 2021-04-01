@@ -10,11 +10,10 @@ namespace Client
     
     public class SocketCommunication
     {
-        public const int MAX = 1024;
+        public const int MAX = 4096;
         private Socket Sock;
         private Thread RecvThr;
         private EvLoop Loop;
-        private MainForm GUI;
 
         public SocketCommunication()
         {
@@ -41,15 +40,9 @@ namespace Client
             return;
         }
 
-        public void SetFormAddress(MainForm a)
-        {
-            GUI = a;
-            return;
-        }
-
         public int SendToServer(string Message)
         {
-            byte[] Buffer = new byte[256];
+            byte[] Buffer = new byte[MAX];
             Buffer = Encoding.Unicode.GetBytes(Message);
             if (!Sock.Connected)
             {
@@ -65,7 +58,7 @@ namespace Client
         {
             while (true)
             {
-                byte[] Buffer = new byte[256];
+                byte[] Buffer = new byte[MAX];
                 if (!Sock.Connected)
                     continue;
                 int Bytes = Sock.Receive(Buffer);

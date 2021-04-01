@@ -12,17 +12,14 @@ namespace Client
     public partial class MainForm : Form
     {
         private string Nickname;
-        private SocketCommunication Sender;
         private EvLoop Loop;
         public delegate void Error(string Error);
         public Error ErrorDelegate;
         public delegate void GlobalMsg(Dictionary<string, string> Args);
         public GlobalMsg GlobalMsgDelegate;
-        public MainForm(SocketCommunication a, EvLoop b)
+        public MainForm(EvLoop b)
         {
-            Sender = a;
             Loop = b;
-            Sender.SetFormAddress(this);
             Loop.SetFormAddress(this);
             InitializeComponent();
             Nickname = "beta_client";
@@ -63,6 +60,10 @@ namespace Client
         {
             ChatLog.AppendText("[SYSTEM]: " + Error + "\r" + "\n");
             return;
+        }
+        private void MainForm_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            Loop.AddTask("exit", null);
         }
     }
 }

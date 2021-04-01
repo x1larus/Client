@@ -78,6 +78,8 @@ namespace Client
                     case "SystemError":
                         ErrorToGUI(Temp.Item2);
                         break;
+                    case "exit":
+                        break;
                 }
 
                 Wait.Reset();
@@ -94,16 +96,16 @@ namespace Client
             string Key = "", Value = "";
             for (int i = 0; i < Request.Length; i++)
             {
-                if (Request[i] == '=' || Request[i] == ';')
+                if ((Request[i] == '=' || Request[i] == ';') && !IsValue)
                     continue;
                 if (Request[i] == '.' && !IsValue)
                     break;
-                if (Request[i] == '<')
+                if (Request[i] == '<' && !IsValue)
                 {
                     IsValue = true;
                     continue;
                 }
-                if (Request[i] == '>')
+                if (Request[i] == '>' && Request[i+1] ==';')
                 {
                     Result.Add(Key, Value);
                     Key = "";
