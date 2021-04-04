@@ -10,10 +10,12 @@ namespace Client
 {
     public partial class LoginForm : Form
     {
-        public LoginForm()
+        private EvLoop Loop;
+        public LoginForm(EvLoop a)
         {
             InitializeComponent();
             ErrorLabel.Visible = false;
+            Loop = a;
         }
 
         private void LoginButton_Click(object sender, EventArgs e)

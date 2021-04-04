@@ -22,13 +22,15 @@ namespace Client
             Loop = b;
             Loop.SetFormAddress(this);
             InitializeComponent();
-            Nickname = "beta_client";
+            Nickname = "";
             ErrorDelegate = new Error(ErrorMethod);
             GlobalMsgDelegate = new GlobalMsg(GlobalMsgMethod);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            LoginForm Login = new LoginForm(Loop);
+            Login.Show();
         }
 
         private void SendButton_Click(object sender, EventArgs e)
