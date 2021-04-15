@@ -48,6 +48,7 @@ namespace Client
             this.ChatLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ChatLog.Size = new System.Drawing.Size(794, 384);
             this.ChatLog.TabIndex = 0;
+            this.ChatLog.TextChanged += new System.EventHandler(this.ChatLog_TextChanged);
             // 
             // MsgEnterBox
             // 

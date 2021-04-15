@@ -71,5 +71,10 @@ namespace Client
             Loop.LoopThr.Join();
             return;
         }
+
+        private void ChatLog_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
