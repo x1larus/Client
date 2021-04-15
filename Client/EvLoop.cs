@@ -92,6 +92,9 @@ namespace Client
                             LoginGUI.Invoke(LoginGUI.SuccesfulLoginDelegate);
                         }
                         break;
+                    case "online":
+                        ParseOnlineUsers(Temp.Item2);
+                        break;
                 }
 
                 Wait.Reset();
@@ -161,6 +164,28 @@ namespace Client
             GUI.Invoke(GUI.ErrorDelegate, new object[] { Args["ERROR"] });
             return;
         }
-    }
 
+        private void ParseOnlineUsers(Dictionary<string, string> Args)
+        {
+            string Users = Args["ONLINE"];
+            if (Users.Length == 0)
+                return;
+            string Temp = "";
+            List<string> List = new List<string>();
+            foreach (var x in Users)
+            {
+                if (x == '>')
+                {
+                    List.Add(Temp);
+                    Temp = "";
+                    continue;
+                }
+                if (x == '<')
+                    continue;
+                Temp += x;
+            }
+            GUI.Invoke(GUI.RefreshOnlineUsersDelegate, new object[] { List });
+            return;
+        }
+    }
 }

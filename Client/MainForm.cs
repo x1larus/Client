@@ -16,6 +16,9 @@ namespace Client
         public Error ErrorDelegate;
         public delegate void GlobalMsg(Dictionary<string, string> Args);
         public GlobalMsg GlobalMsgDelegate;
+        public delegate void RefreshOnlineUsers(List<string> Users);
+        public RefreshOnlineUsers RefreshOnlineUsersDelegate;
+
         public MainForm(EvLoop b)
         {
             this.FormClosing += MainForm_FormClosing;
@@ -24,6 +27,7 @@ namespace Client
             InitializeComponent();
             ErrorDelegate = new Error(ErrorMethod);
             GlobalMsgDelegate = new GlobalMsg(GlobalMsgMethod);
+            RefreshOnlineUsersDelegate = new RefreshOnlineUsers(RefreshOnlineUsersMethod);
             this.Hide();
         }
 
@@ -72,7 +76,22 @@ namespace Client
             return;
         }
 
+        private void RefreshOnlineUsersMethod(List<string> Users)
+        {
+            OnlineUsers.Clear();
+            foreach (var x in Users)
+            {
+                OnlineUsers.AppendText("➤ " + x + "\r" + "\n");
+            }
+            return;
+        }
+
         private void ChatLog_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

@@ -17,12 +17,12 @@ namespace Client
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //
+
             SocketCommunication Sender = new SocketCommunication();
             EvLoop Loop = new EvLoop();
             Sender.SetLoopAddress(Loop);
             Loop.SetSenderAddress(Sender);
-            Sender.Connect("172.31.8.82", 3333); //fuck yeah
+            Sender.Connect("172.20.144.240", 3333); //fuck yeah
             Application.Run(new MainForm(Loop));
         }
     }
