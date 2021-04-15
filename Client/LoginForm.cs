@@ -11,11 +11,16 @@ namespace Client
     public partial class LoginForm : Form
     {
         private EvLoop Loop;
+        public delegate void SuccesfulLogin();
+        public SuccesfulLogin SuccesfulLoginDelegate;
+
         public LoginForm(EvLoop a)
         {
             InitializeComponent();
             ErrorLabel.Visible = false;
             Loop = a;
+            Loop.LoginGUI = this;
+            SuccesfulLoginDelegate = new SuccesfulLogin(SuccesfulLoginMethod);
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -30,6 +35,17 @@ namespace Client
                 PassBox.Clear();
                 return;
             }
+            Dictionary<string, string> Args = new Dictionary<string, string>();
+            Args["TYPE"] = "login";
+            Args["LOGIN"] = Login;
+            Args["PASSWORD"] = Password;
+            Loop.AddTask("SendToServer", Args);
+        }
+
+        private void SuccesfulLoginMethod()
+        {
+            Close();
+            return;
         }
     }
 }

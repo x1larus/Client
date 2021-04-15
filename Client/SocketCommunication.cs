@@ -12,7 +12,7 @@ namespace Client
     {
         public const int MAX = 4096;
         private Socket Sock;
-        private Thread RecvThr;
+        public Thread RecvThr;
         private EvLoop Loop;
 
         public SocketCommunication()
@@ -65,6 +65,9 @@ namespace Client
                 if (Bytes == 0)
                     continue;
                 string Request = Encoding.Unicode.GetString(Buffer, 0, Bytes);
+                //exit
+                if (Request == "exit")
+                    return;
                 Dictionary<string, string> Temp = new Dictionary<string, string>();
                 Temp.Add("request", Request);
                 Loop.AddTask("RecvParse", Temp);

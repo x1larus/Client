@@ -11,12 +11,15 @@ namespace Client
         private Queue<Tuple<string, Dictionary<string, string>>> TaskQueue;
         private ManualResetEvent Wait;
         private static object QueueLock;
-        private Thread LoopThr;
+        public Thread LoopThr;
         private MainForm GUI;
+        public LoginForm LoginGUI;
         private SocketCommunication Sender;
+        private bool IsActive;
 
         public EvLoop()
         {
+            IsActive = true;
             TaskQueue = new Queue<Tuple<string, Dictionary<string, string>>>();
             Wait = new ManualResetEvent(false);
             QueueLock = new object();
@@ -50,7 +53,7 @@ namespace Client
 
         public void Loop()
         {
-            while (true)
+            while (IsActive)
             {
                 lock (QueueLock)
                 {
@@ -79,6 +82,15 @@ namespace Client
                         ErrorToGUI(Temp.Item2);
                         break;
                     case "exit":
+                        IsActive = false;
+                        BuildRequest(Temp.Item2);
+                        Sender.RecvThr.Join();
+                        return;
+                    case "auth":
+                        if (Temp.Item2["AUTH"] == "true")
+                        {
+                            LoginGUI.Invoke(LoginGUI.SuccesfulLoginDelegate);
+                        }
                         break;
                 }
 

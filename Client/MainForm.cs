@@ -11,7 +11,6 @@ namespace Client
 {
     public partial class MainForm : Form
     {
-        private string Nickname;
         private EvLoop Loop;
         public delegate void Error(string Error);
         public Error ErrorDelegate;
@@ -19,18 +18,20 @@ namespace Client
         public GlobalMsg GlobalMsgDelegate;
         public MainForm(EvLoop b)
         {
+            this.FormClosing += MainForm_FormClosing;
             Loop = b;
             Loop.SetFormAddress(this);
             InitializeComponent();
-            Nickname = "";
             ErrorDelegate = new Error(ErrorMethod);
             GlobalMsgDelegate = new GlobalMsg(GlobalMsgMethod);
+            this.Hide();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            LoginForm Login = new LoginForm(Loop);
-            Login.Show();
+            LoginForm LoginGUI = new LoginForm(Loop);
+            LoginGUI.Show();
+            this.Hide();
         }
 
         private void SendButton_Click(object sender, EventArgs e)
@@ -41,7 +42,6 @@ namespace Client
             MsgEnterBox.Clear();
             Dictionary<string, string> Args = new Dictionary<string, string>();
             Args.Add("TYPE", "global");
-            Args.Add("SENDER", Nickname);
             Args.Add("RECIEVERS", "all");
             Args.Add("MSG", Message);
             Loop.AddTask("SendToServer", Args);
@@ -65,7 +65,11 @@ namespace Client
         }
         private void MainForm_FormClosing(Object sender, FormClosingEventArgs e)
         {
-            Loop.AddTask("exit", null);
+            Dictionary<string, string> Args = new Dictionary<string, string>();
+            Args["TYPE"] = "logout";
+            Loop.AddTask("exit", Args);
+            Loop.LoopThr.Join();
+            return;
         }
     }
 }
