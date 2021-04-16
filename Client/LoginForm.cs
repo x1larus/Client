@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Text;
 
 namespace Client
 {
@@ -17,6 +18,16 @@ namespace Client
         public LoginForm(EvLoop a)
         {
             InitializeComponent();
+            PrivateFontCollection fontCollection = new PrivateFontCollection();
+            fontCollection.AddFontFile("font.ttf"); // файл шрифта
+            FontFamily family = fontCollection.Families[0];
+            // Создаём шрифт и используем далее
+            Font font = new Font(family, 20);
+
+            //задача шрифтов
+            LoginButton.Font = font;
+            AuthorizationLabel.Font = font;
+
             ErrorLabel.Visible = false;
             Loop = a;
             Loop.LoginGUI = this;

@@ -135,7 +135,7 @@ namespace Client
             this.Controls.Add(this.OnlineLable);
             this.Controls.Add(this.ChatLog);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(109)))), ((int)(((byte)(100)))));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.ShowIcon = false;

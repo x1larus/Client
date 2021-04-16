@@ -22,7 +22,7 @@ namespace Client
             EvLoop Loop = new EvLoop();
             Sender.SetLoopAddress(Loop);
             Loop.SetSenderAddress(Sender);
-            Sender.Connect("172.20.146.136", 3333); //fuck yeah
+            Sender.Connect("172.20.149.33", 3333); //fuck yeah
             Application.Run(new MainForm(Loop));
         }
     }
