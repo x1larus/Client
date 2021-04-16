@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.Drawing.Text;
 
 namespace Client
 {
@@ -21,10 +22,24 @@ namespace Client
 
         public MainForm(EvLoop b)
         {
+            InitializeComponent();
+            //font
+            PrivateFontCollection fontCollection = new PrivateFontCollection();
+            fontCollection.AddFontFile("font.ttf"); // файл шрифта
+            FontFamily family = fontCollection.Families[0];
+            // Создаём шрифт и используем далее
+            Font font = new Font(family, 20);
+
+            //задача шрифтов
+            ChatLog.Font = font;
+            MsgEnterBox.Font = font;
+            OnlineLable.Font = font;
+            OnlineUsers.Font = font;
+            SendButton.Font = font;
+
             this.FormClosing += MainForm_FormClosing;
             Loop = b;
             Loop.SetFormAddress(this);
-            InitializeComponent();
             ErrorDelegate = new Error(ErrorMethod);
             GlobalMsgDelegate = new GlobalMsg(GlobalMsgMethod);
             RefreshOnlineUsersDelegate = new RefreshOnlineUsers(RefreshOnlineUsersMethod);
@@ -81,7 +96,7 @@ namespace Client
             OnlineUsers.Clear();
             foreach (var x in Users)
             {
-                OnlineUsers.AppendText("➤ " + x + "\r" + "\n");
+                OnlineUsers.AppendText("● " + x + "\r" + "\n");
             }
             return;
         }
@@ -92,6 +107,11 @@ namespace Client
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
         {
 
         }
